@@ -1,7 +1,7 @@
 'use strict';
 
 const front = () => {
-  let ws = new WebSocket('ws://localhost:8080/');
+  let ws = new WebSocket('ws://66.154.105.119:8080/');
 
   ws.addEventListener('open', msg => ws.send('from client to server'));
 
