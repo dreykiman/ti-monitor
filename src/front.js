@@ -1,0 +1,15 @@
+const front = () => {
+  let ws = new WebSocket('ws://localhost:8080/')
+
+  ws.addEventListener('open', msg => ws.send('from client to server'))
+
+  ws.addEventListener('close', msg => ws.send('close'))
+
+  ws.addEventListener('message', msg => {
+    let data = JSON.parse(msg.data)
+    Object.keys(data).forEach( kk => {
+      document.getElementById(kk).innerHTML = Number(data[kk]).toFixed(6)
+    })
+    console.log('incoming: '+msg.data)
+  })
+}

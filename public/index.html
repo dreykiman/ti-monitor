@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>TI feed</title>
+
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<style>
+
+body {
+  font-family: 'Roboto';font-size: 22px;
+}
+
+table {
+  table-layout: fixed;
+}
+
+tr.PENDING {
+  color: red;
+}
+
+td {
+  text-align: left;
+  vertical-align: text-top;
+  padding: 0.3em;
+}
+
+</style>
+
+<script src=front.js></script>
+</head>
+
+<body onload=front()>
+<table>
+ <tr><td>SMA5</td><td id=ma5>
+ </td></tr>
+ <tr><td>SMA10</td><td id=ma10>
+ </td></tr>
+ <tr><td>SMA12</td><td id=ma12>
+ </td></tr>
+ <tr><td>SMA20</td><td id=ma20>
+ </td></tr>
+ <tr><td>SMA26</td><td id=ma26>
+ </td></tr>
+</table>
+</body>
+</html>
