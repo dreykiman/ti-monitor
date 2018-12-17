@@ -8,8 +8,9 @@ const front = () => {
   ws.addEventListener('message', msg => {
     let data = JSON.parse(msg.data)
     Object.keys(data).forEach( kk => {
-      document.getElementById(kk).innerHTML = Number(data[kk]).toFixed(6)
+      document.getElementById(kk).innerHTML = Number(data[kk]).toFixed(7)
     })
+    document.getElementById("updateLabel").innerHTML = new Date().toLocaleString()
     console.log('incoming: '+msg.data)
   })
 }
