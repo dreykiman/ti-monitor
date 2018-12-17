@@ -11,9 +11,10 @@ export default class MACD {
       return cprices
     }, [])
 
+    let dict = this.dict
     let maIndices = [5,10,12,20,26]
     maIndices.forEach( maIndex => {
-      this.dict['sma'+maIndex] = closingPrices.slice(0,maIndex).reduce( (a,b) => Number(a)+Number(b) ) / maIndex
+      dict['sma'+maIndex] = closingPrices.slice(0,maIndex).reduce( (a,b) => Number(a)+Number(b) ) / maIndex
 
       let startIndex = closingPrices.length - maIndex
       let ema = closingPrices.slice(-maIndex).reduce( (a,b) => Number(a)+Number(b) ) / maIndex
@@ -21,8 +22,10 @@ export default class MACD {
         ema = (closingPrices[startIndex] - ema) * 2 / (maIndex + 1) + ema
         startIndex--
       }
-      this.dict['ema'+maIndex] = ema
+      dict['ema'+maIndex] = ema
     })
+
+    dict.macd = dict.ema26 - dict.ema12
   }
 
   output() {
