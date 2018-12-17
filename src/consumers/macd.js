@@ -1,5 +1,6 @@
 export default class MACD {
   constructor() {
+    this.dict = {}
   }
 
   feed(ledger) {
@@ -12,9 +13,20 @@ export default class MACD {
 
     let maIndices = [5,10,12,20,26]
     maIndices.forEach( maIndex => {
-      this['sma'+maIndex] = closingPrices.slice(0,maIndex).reduce( (a,b) => Number(a)+Number(b) )/maIndex
-      
+      this.dict['sma'+maIndex] = closingPrices.slice(0,maIndex).reduce( (a,b) => Number(a)+Number(b) ) / maIndex
+
+      let startIndex = closingPrices.length - maIndex
+      let ema = closingPrices.slice(-maIndex).reduce( (a,b) => Number(a)+Number(b) ) / maIndex
+      while(startIndex >= 0) {
+        ema = (closingPrices[startIndex] - ema) * 2 / (maIndex + 1) + ema
+        startIndex--
+      }
+      this.dict['ema'+maIndex] = ema
     })
+  }
+
+  output() {
+    return this.dict
   }
 }
 
