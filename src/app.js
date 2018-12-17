@@ -12,7 +12,7 @@ binance.ready.then( () => {
     wsclients.forEach( cli => {
       let inp = {}
       let maIndices = [5,10,12,20,26]
-      maIndices.forEach(maIndex => inp['ma'+maIndex] = macd['ma'+maIndex])
+      maIndices.forEach(maIndex => inp['sma'+maIndex] = macd['sma'+maIndex])
       cli.send(JSON.stringify(inp))
     })
   }, 3000)

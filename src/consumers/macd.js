@@ -4,14 +4,17 @@ export default class MACD {
 
   feed(ledger) {
     let now = ledger.slice(-1)[0].time
-    let sma = ledger.reduce( (sma, trd) => {
+    let closingPrices = ledger.reduce( (cprices, trd) => {
       let ind = Math.floor((now-trd.time)/60000)
-      sma[ind] = trd.price
-      return sma
+      cprices[ind] = trd.price
+      return cprices
     }, [])
 
     let maIndices = [5,10,12,20,26]
-    maIndices.forEach( maIndex => this['ma'+maIndex] = sma.slice(-maIndex).reduce( (a,b) => Number(a)+Number(b) )/maIndex )
+    maIndices.forEach( maIndex => {
+      this['sma'+maIndex] = closingPrices.slice(0,maIndex).reduce( (a,b) => Number(a)+Number(b) )/maIndex
+      
+    })
   }
 }
 
